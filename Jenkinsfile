@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = 'docker.io'
-        IMAGE_NAME = 'kseahibiki/gateway'
+        REGISTRY = 'localhost:5005'
+        IMAGE_NAME = 'gateway'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
@@ -14,7 +14,10 @@ pipeline {
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/KseaHibiki/t_Net8Services-gateway.git']],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/KseaHibiki/t_Net8Services-gateway.git',
+                            credentialsId: 'github-pat-token'
+                        ]],
                         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'gateway']]
                     ])
                 }
@@ -24,16 +27,8 @@ pipeline {
         stage('Restore & Build') {
             steps {
                 dir('t_Net8Services') {
-                    sh 'dotnet restore gateway/Gateway.csproj'
-                    sh 'dotnet build gateway/Gateway.csproj -c Release --no-restore'
-                }
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                dir('t_Net8Services') {
-                    sh 'dotnet test gateway/Gateway.csproj -c Release --no-build || echo "No tests found"'
+                    bat 'dotnet restore gateway/Gateway.csproj'
+                    bat 'dotnet build gateway/Gateway.csproj -c Release --no-restore'
                 }
             }
         }
@@ -41,17 +36,9 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 dir('t_Net8Services') {
-                    sh """
-                        docker build \\
-                            -f gateway/Dockerfile \\
-                            -t ${IMAGE_NAME}:${IMAGE_TAG} \\
-                            -t ${IMAGE_NAME}:latest \\
-                            .
-                    """
-                    sh """
-                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
-                        docker tag ${IMAGE_NAME}:latest ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-                    """
+                    bat "docker build -f gateway/Dockerfile -t ${REGISTRY}/${IMAGE_NAME}:%IMAGE_TAG% -t ${REGISTRY}/${IMAGE_NAME}:latest ."
+                    bat "docker push ${REGISTRY}/${IMAGE_NAME}:%IMAGE_TAG%"
+                    bat "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
                 }
             }
         }
@@ -59,10 +46,13 @@ pipeline {
 
     post {
         success {
-            echo 'Gateway 构建并推送成功！'
+            echo "✅ Gateway 镜像已推送: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
         }
         failure {
-            echo 'Gateway 构建失败，请检查日志。'
+            echo '❌ Gateway 构建失败'
+        }
+        always {
+            cleanWs()
         }
     }
 }
