@@ -51,6 +51,18 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"

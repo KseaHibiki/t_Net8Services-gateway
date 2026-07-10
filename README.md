@@ -5,29 +5,63 @@
 ## 技术栈
 
 - **框架**: ASP.NET Core 8 + Yarp.ReverseProxy
+- **日志**: Serilog（控制台 + 按天滚动文件）
 - **数据库**: 无
 
-## 路由配置
+## 路由规则
 
-路由规则定义在 `appsettings.json` 的 `ReverseProxy` 节：
+| 外部路径 | 目标服务 | 后端地址 | 说明 |
+|---|---|---|---|
+| `/api/orders/*` | Shop.API | `http://shop-api:8080` | 创建订单、查询订单 |
+| `/api/inventory/*` | WMS.API | `http://wms-api:8080` | 初始化库存、查询库存 |
 
-| 路由前缀 | 目标服务 | 说明 |
-|---|---|---|
-| `/api/orders/*` | `http://shop-api:8080` | 订单相关请求转发至 Shop |
-| `/api/inventory/*` | `http://wms-api:8080` | 库存相关请求转发至 WMS |
+## 通过网关调用的接口
+
+### POST /api/orders — 创建订单（转发至 Shop）
+
+```bash
+curl -X POST http://localhost:5000/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{"productId":"550e8400-e29b-41d4-a716-446655440000","quantity":5}'
+```
+
+响应与 Shop.API 直连完全一致。
+
+### GET /api/orders/{id} — 查询订单（转发至 Shop）
+
+```bash
+curl http://localhost:5000/api/orders/c4b4463f-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+```
+
+### POST /api/inventory/seed — 初始化库存（转发至 WMS）
+
+```bash
+curl -X POST http://localhost:5000/api/inventory/seed \
+  -H "Content-Type: application/json" \
+  -d '{"productId":"550e8400-e29b-41d4-a716-446655440000","quantity":100}'
+```
+
+### GET /api/inventory/{productId} — 查询库存（转发至 WMS）
+
+```bash
+curl http://localhost:5000/api/inventory/550e8400-e29b-41d4-a716-446655440000
+```
 
 ## 端口
 
 | 端口 | 说明 |
 |---|---|
-| 5000 | 外部访问端口 |
+| 5000 | 网关外部访问端口 |
 
-所有外部请求统一通过 `http://localhost:5000/` 进入，由 Gateway 转发到对应微服务。
+## 直连 vs 网关
+
+| 方式 | 地址 | 适用场景 |
+|---|---|---|
+| 通过网关 | `http://localhost:5000/api/...` | 生产环境、前端调用 |
+| 直连服务 | `http://localhost:5001/api/...` | 本地调试单个服务 |
 
 ## 本地运行
 
 ```bash
 dotnet run --project gateway/Gateway.csproj
 ```
-
-> 单个 API 调试时可直接访问对应微服务的端口（5001/5002/5003），绕过网关。

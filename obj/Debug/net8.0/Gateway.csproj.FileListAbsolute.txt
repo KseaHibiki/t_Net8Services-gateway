@@ -33,3 +33,14 @@ D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\refint\Gateway.dll
 D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\Gateway.pdb
 D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\Gateway.genruntimeconfig.cache
 D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\ref\Gateway.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.AspNetCore.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.File.dll
+D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\Gateway.sourcelink.json
