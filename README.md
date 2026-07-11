@@ -110,12 +110,26 @@ curl http://localhost:5000/api/inventory/{productId}
 | 5002 | WMS.API | 仓储服务（直连） |
 | 5004 | Payment.API | 支付服务（直连） |
 
+## 环境配置
+
+服务通过 `appsettings.json` + `appsettings.{Environment}.json` 实现多环境配置，由 `ASPNETCORE_ENVIRONMENT` 环境变量控制。
+
+| 配置文件 | 适用环境 | 日志级别 | Redis 连接 | 限流（每 IP 每 10s） |
+|----------|:--------:|:--------:|:----------:|:-------------------:|
+| `appsettings.json` | 基础公共 | — | `localhost:6379` | 100 次 |
+| `appsettings.Development.json` | Development | Debug | `localhost:6379` | 200 次 |
+| `appsettings.Production.json` | Production | Information | Docker 内部 (环境变量覆写) | 100 次 |
+
+> `docker-compose.yml` 中设置 `ASPNETCORE_ENVIRONMENT=Development`，`docker-compose.prod.yml` 中设置为 `Production`。
+
 ## 本地运行
 
 ```bash
-# 确保 Redis 已运行（默认 localhost:6379）
-# 然后启动网关
+# Development 模式（默认）
 dotnet run --project gateway/Gateway.csproj
+
+# 或指定环境
+ASPNETCORE_ENVIRONMENT=Development dotnet run --project gateway/Gateway.csproj
 ```
 
 Docker Compose 方式（推荐）：
