@@ -88,5 +88,5 @@ app.UseSerilogRequestLogging();
 app.MapControllers();
 app.MapReverseProxy();
 
-Log.Information("Gateway 启动完成，监听端口 5000，路由: /api/orders -> Shop, /api/inventory -> WMS");
+Log.Information("Gateway 启动完成，监听端口 5000，路由: /api/orders -> Shop, /api/inventory -> WMS, /api/payments -> Payment");
 app.Run();
