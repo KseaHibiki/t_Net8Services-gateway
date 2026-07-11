@@ -44,3 +44,5 @@ D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.File.dll
 D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\Gateway.sourcelink.json
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\StackExchange.Redis.dll
