@@ -46,3 +46,13 @@ D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Serilog.Sinks.File.dll
 D:\Net8Service\t_Net8Services\gateway\obj\Debug\net8.0\Gateway.sourcelink.json
 D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
 D:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\StackExchange.Redis.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\appsettings.Development.json
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\appsettings.Production.json
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+d:\Net8Service\t_Net8Services\gateway\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
